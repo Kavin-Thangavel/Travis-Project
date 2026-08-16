@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  test:
+    machine:
+      image: ubuntu-2204:current
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build Docker image
+          command: docker build -t kavin/react-sample -f Dockerfile.dev .
+
+      - run:
+          name: Run tests
+          command: docker run -e CI=true kavin/react-sample npm test
+
+workflows:
+  test-workflow:
+    jobs:
+      - test
