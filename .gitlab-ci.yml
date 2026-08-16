@@ -1,0 +1,16 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - test
+
+before_script:
+  - docker info
+
+test:
+  stage: test
+  script:
+    - docker build -t kavin/react-sample -f Dockerfile.dev .
+    - docker run -e CI=true kavin/react-sample npm test
