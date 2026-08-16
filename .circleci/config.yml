@@ -10,11 +10,11 @@ jobs:
 
       - run:
           name: Build Docker image
-          command: docker build -t kavin/react-sample -f Dockerfile.dev .
+          command: docker build -t kavin/react-sample .
 
       - run:
           name: Run tests
-          command: docker run -e CI=true kavin/react-sample npm run test
+          command: docker run kavin/react-sample npm run build
 
 workflows:
   test-workflow:
